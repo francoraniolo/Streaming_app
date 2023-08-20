@@ -33,6 +33,9 @@ gem "redis", "~> 4.0"
 # Serialization
 gem 'active_model_serializers', '~> 0.10.2'
 
+# Commands
+gem 'simple_command'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
