@@ -4,7 +4,7 @@ class CreateEpisodes < ActiveRecord::Migration[7.0]
       t.string :title
       t.text :plot
       t.integer :number
-      t.references :season, foreign_key: true
+      t.belongs_to :season, foreign_key: true
 
       t.timestamps
     end

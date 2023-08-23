@@ -3,6 +3,7 @@ class CreatePurchaseOptions < ActiveRecord::Migration[7.0]
     create_table :purchase_options do |t|
       t.decimal :price, precision: 5, scale: 2, default: 2.99
       t.integer :video_quality
+      t.references :purchasable, polymorphic: true
 
       t.timestamps
     end

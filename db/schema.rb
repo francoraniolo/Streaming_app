@@ -33,12 +33,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_000025) do
   end
 
   create_table "movies", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "products", force: :cascade do |t|
-    t.string "type"
     t.string "title"
     t.string "plot"
     t.datetime "created_at", null: false
@@ -48,8 +42,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_000025) do
   create_table "purchase_options", force: :cascade do |t|
     t.decimal "price", precision: 5, scale: 2, default: "2.99"
     t.integer "video_quality"
+    t.string "purchasable_type"
+    t.integer "purchasable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["purchasable_type", "purchasable_id"], name: "index_purchase_options_on_purchasable"
   end
 
   create_table "purchases", force: :cascade do |t|
@@ -63,6 +60,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_000025) do
   end
 
   create_table "seasons", force: :cascade do |t|
+    t.string "title"
+    t.string "plot"
     t.integer "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

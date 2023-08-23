@@ -1,9 +1,9 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    @products = (Movie.all + Season.all).sort_by(&:created_at)
+    render json: @products, each_serializer: ProductSerializer
   end
 
   def show
-    @product = Product.find(params[:id])
   end
 end

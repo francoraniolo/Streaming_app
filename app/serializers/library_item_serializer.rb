@@ -3,7 +3,7 @@ class LibraryItemSerializer < ActiveModel::Serializer
              :expires_at,
              :created_at
 
-  belongs_to :product, polymorphic: true
+  belongs_to :product
 
   def product
     if object.product_type == 'Movie'
