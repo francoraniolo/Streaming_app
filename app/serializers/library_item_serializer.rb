@@ -3,13 +3,5 @@ class LibraryItemSerializer < ActiveModel::Serializer
              :expires_at,
              :created_at
 
-  belongs_to :product
-
-  def product
-    if object.product_type == 'Movie'
-      MovieSerializer.new(object.product, root: false)
-    elsif object.product_type == 'Season'
-      SeasonSerializer.new(object.product, root: false)
-    end
-  end
+  belongs_to :product, serializer: ProductSerializer
 end

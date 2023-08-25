@@ -1,6 +1,6 @@
 class SeasonsController < ApplicationController
   def index
-    @seasons = Season.all
+    @seasons = Season.order(created_at: :asc)
     render json: @seasons, each_serializer: SeasonSerializer
   end
 

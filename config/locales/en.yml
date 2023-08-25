@@ -31,3 +31,5 @@
 
 en:
   hello: "Hello world"
+  base:
+    invalid_purchase: "You already owns this product"
