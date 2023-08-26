@@ -6,4 +6,8 @@ class LibraryItem < ApplicationRecord
   def expired?
     expires_at > Time.current
   end
+
+  def self.cache_key
+    "#{user.id}_#{maximum(:updated_at)}"
+  end
 end

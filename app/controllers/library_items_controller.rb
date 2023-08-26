@@ -1,6 +1,9 @@
 class LibraryItemsController < ApplicationController
   def index
-    @library_items = user.library_items.order(:created_at)
+    @library_items = Rails.cache.fetch(LibraryItem.cache_key, expires_in: 1.day) do
+      user.library_items.order(:created_at)
+    end
+
     render json: @library_items, each_serializer: LibraryItemSerializer
   end
 
