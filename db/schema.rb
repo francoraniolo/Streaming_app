@@ -23,12 +23,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_000025) do
 
   create_table "library_items", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "purchase_id"
     t.string "product_type"
     t.integer "product_id"
     t.datetime "expires_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_type", "product_id"], name: "index_library_items_on_product"
+    t.index ["purchase_id"], name: "index_library_items_on_purchase_id"
     t.index ["user_id"], name: "index_library_items_on_user_id"
   end
 
@@ -52,7 +54,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_20_000025) do
   create_table "purchases", force: :cascade do |t|
     t.integer "user_id"
     t.integer "purchase_option_id"
-    t.datetime "expires_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["purchase_option_id"], name: "index_purchases_on_purchase_option_id"

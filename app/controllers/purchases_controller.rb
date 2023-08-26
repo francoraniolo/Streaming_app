@@ -8,15 +8,26 @@ class PurchasesController < ApplicationController
   end
 
   def create
-    user = User.find(params[:user_id])
     purchase_option = PurchaseOption.find(params[:purchase_option_id])
-    command = Commands::Purchases::Create.call(user, purchase_option)
+    command = CreatePurchase.call(user, purchase_option)
 
     if command.success?
-      render json: command.result, serializer: ProductSerializer
+      render json: command.result.purchasable, serializer: ProductSerializer
     else
       # render error message
       render json: { error: command.error_message }, status: :unprocessable_entity
     end
+  end
+
+  def create_params
+    { user: user, purchase_option: purchase_option }
+  end
+
+  def user
+    @user ||= User.find(params[:user_id])
+  end
+
+  def purchase_option
+    @purchase_option ||= PurchaseOption.find(params[:purchase_option_id])
   end
 end

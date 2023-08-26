@@ -1,6 +1,4 @@
-module Commands
-  module Purchases
-    class Create
+   class CreatePurchase
       prepend SimpleCommand
       include ActiveModel::Validations
 
@@ -18,7 +16,7 @@ module Commands
           ActiveRecord::Base.transaction do
             create_purchase
             create_library_item
-            return purchase
+            purchase
           end
         else
           errors.add(:base, :invalid_purchase)
@@ -28,7 +26,7 @@ module Commands
       private
 
       def create_library_item
-        @library_item = LibraryItem.create(user: user, product: purchase_option.product, purchase: purchase, expires_at: Time.current + EXPIRING_TIME)
+        @library_item = LibraryItem.create(user: user, purchase: purchase, expires_at: Time.current + EXPIRING_TIME)
       end
 
       def create_purchase
@@ -36,11 +34,6 @@ module Commands
       end
 
       def user_can_purchase
-        !user.library_items.joins(:purchase)
-        .where(library_items: { product: purchase_option.product })
-        .where('purchases.expires_at >= ?', Time.current)
-        .exists?
+        user.library_items.where(product: purchase_option.purchasable).where("expires_at < ?", Time.current).empty?
       end
     end
-  end
-end
