@@ -26,11 +26,12 @@
       private
 
       def create_library_item
-        @library_item = LibraryItem.create(user: user, purchase: purchase, expires_at: Time.current + EXPIRING_TIME)
+        byebug
+        @library_item = user.library_items.create!(product: purchase_option.purchasable, purchase: purchase, expires_at: Time.current + EXPIRING_TIME)
       end
 
       def create_purchase
-        @purchase = user.purchases.create(purchase_option: purchase_option)
+        @purchase = user.purchases.create!(purchase_option: purchase_option)
       end
 
       def user_can_purchase

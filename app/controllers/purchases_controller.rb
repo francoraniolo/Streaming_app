@@ -19,10 +19,6 @@ class PurchasesController < ApplicationController
     end
   end
 
-  def create_params
-    { user: user, purchase_option: purchase_option }
-  end
-
   def user
     @user ||= User.find(params[:user_id])
   end
