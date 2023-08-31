@@ -3,6 +3,8 @@ class LibraryItem < ApplicationRecord
   belongs_to :product, polymorphic: true
   belongs_to :purchase
 
+  validates :expires_at, presence: true
+
   def expired?
     expires_at > Time.current
   end

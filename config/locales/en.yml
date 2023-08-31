@@ -30,6 +30,10 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
-  base:
-    invalid_purchase: "You already owns this product"
+  activemodel:
+    errors:
+      models:
+        create_purchase:
+          attributes:
+            base:
+              invalid_purchase: "You already owns this product"
