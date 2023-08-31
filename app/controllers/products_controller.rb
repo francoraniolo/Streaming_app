@@ -8,6 +8,8 @@ class ProductsController < ApplicationController
   end
 
   def cache_key
-    cache_key = 'products_' + (Movie.maximum(:updated_at) || 'none') + '_' + (Season.maximum(:updated_at) || 'none')
+    movie_updated_at = Movie.maximum(:updated_at)&.to_s || 'none'
+    season_updated_at = Season.maximum(:updated_at)&.to_s || 'none'
+    cache_key = 'products_' + movie_updated_at + '_' + season_updated_at
   end
 end
