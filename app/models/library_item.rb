@@ -9,7 +9,7 @@ class LibraryItem < ApplicationRecord
     expires_at > Time.current
   end
 
-  def self.cache_key
+  def self.cache_key(user)
     "#{user.id}_#{maximum(:updated_at)}"
   end
 end

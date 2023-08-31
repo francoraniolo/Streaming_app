@@ -9,9 +9,6 @@ RSpec.describe CreatePurchase, type: :command do
 
   describe '.call' do
     context 'when user can make a purchase' do
-      # before do
-      #   allow(user).to receive_message_chain(:library_items, :where, :where, :empty?).and_return(true)
-      # end
       it 'creates a purchase and a library item' do
         expect(command).to be_success
         expect(command.result).to be_an_instance_of(Purchase)
@@ -20,9 +17,7 @@ RSpec.describe CreatePurchase, type: :command do
     end
 
     context 'when user cannot make a purchase' do
-      before do
-        allow(user).to receive_message_chain(:library_items, :where, :where, :empty?).and_return(false)
-      end
+      let!(:library_item) { create(:library_item, user: user, product: movie, expires_at: 2.days.from_now) }
 
       it 'adds an error to the command' do
         expect(command).to be_failure

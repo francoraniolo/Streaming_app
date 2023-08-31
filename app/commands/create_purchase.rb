@@ -26,7 +26,8 @@ class CreatePurchase
   private
 
   def create_library_item
-    @library_item = user.library_items.create!(product: purchase_option.purchasable, purchase:,
+    @library_item = user.library_items.create!(product: purchase_option.purchasable,
+                                               purchase: purchase,
                                                expires_at: Time.current + EXPIRING_TIME)
   end
 
@@ -35,6 +36,6 @@ class CreatePurchase
   end
 
   def user_can_purchase
-    user.library_items.where(product: purchase_option.purchasable).where('expires_at < ?', Time.current).empty?
+    user.library_items.where(product: purchase_option.purchasable).where('expires_at > ?', Time.current).empty?
   end
 end

@@ -14,8 +14,7 @@ class PurchasesController < ApplicationController
     if command.success?
       render json: command.result.purchasable, serializer: ProductSerializer
     else
-      # render error message
-      render json: { error: command.error_message }, status: :unprocessable_entity
+      render json: { error: command.errors.first.message }, status: :unprocessable_entity
     end
   end
 
