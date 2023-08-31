@@ -1,24 +1,32 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Populate db
+I made a rake task to populate the local database (is not too much data, so maybe some items could be repeated but with a different id of course)
 
-Things you may want to cover:
+rails db:create db:migrate db:populate
 
-* Ruby version
+## Start server
+rails server
 
-* System dependencies
+## Endpoints
 
-* Configuration
+### GET /movies
+Return the full list of movies
+### GET /seasons
+Return the full list of seasons
+### GET /products
+Return full list of movies and seasons
 
-* Database creation
+You can also access only movies through /products/movies and seasons through /products/seasons
+### GET /library_items?user_id={user id}
+Return purchased items available for the user
 
-* Database initialization
+### POST /purchases
+    Body example: {
+            "user_id": 1,
+            "purchase_option_id": 1
+          }         
+Buy a product
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
-
-* ...
